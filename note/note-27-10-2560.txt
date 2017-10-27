@@ -1,0 +1,4 @@
+squid ใช้ทำ Proxy ใช้ port 3128 ปกติ หรือ 8080 ไม่ปกติ
+docker hub 
+sameersbn/squid ค่อนข้างดี
+docker run -it -d --name ProxyServer -p 3128:3128 -v D:\58160698\squid:/var/spool/squid3 sameersbn/squid:3.3.8-23
