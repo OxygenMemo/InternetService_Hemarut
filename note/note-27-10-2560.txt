@@ -14,3 +14,26 @@ docker exec -it PorxyServer bin/bash
 ดูใน /var/log/squid3/
 tail -f /var/log/squid3/access.log
 * tail คือ ใช้ดูข้อมูลใน file
+----------------------------------------------
+จะทดลองกับ linux
+ubuntu 17.04 (image)
+docker run -it -d --name Ubuntu -p 9000:80 ubuntu:17.04
+
+สร้าง network ชื่อ proxy_net
+docker network create proxy_net
+
+แล้วเอา 2 ตัวมาอยู่ ใน proxy_net
+
+แล้วเข้า ubuntu
+docker exec -it Ubuntu /bin/bash
+
+ติดตั้ง apt-get update
+// ติดตั้ง ping 
+apt-get install iputils-ping
+
+แล้ว ping ProxyServer
+
+set everonment =set proxy ให้ linux
+export http_proxy=http://ipProxy:port
+export https_proxy=https://ipProxy:port
+ต้อง set 2 อัน ทั้ง http และ https
