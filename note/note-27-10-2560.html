@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<meta charset=“UTF-8”>
+	</head>
+	<body>
+<pre>
+squid ใช้ทำ Proxy ใช้ port 3128 ปกติ หรือ 8080 ไม่ปกติ
+docker hub 
+sameersbn/squid ค่อนข้างดี
+docker run -it -d --name ProxyServer -p 3128:3128 -v D:\58160698\squid:/var/spool/squid3 sameersbn/squid:3.3.8-23
+
+และไป set ที่ browser set proxy -> Lan Seting -> Proxy server ->Use a proxy server
+ใส่ ip และ prot proxy ที่ map
+
+ตรวจดู proxy ว่า cashe จริงใหมต้องเข้า proxy
+การเข้า proxy docker ที่สร้าง คำสั่ง 
+docker exec -it PorxyServer bash
+หรือ
+docker exec -it PorxyServer bin/bash
+ดูใน /var/log/squid3/
+tail -f /var/log/squid3/access.log
+* tail คือ ใช้ดูข้อมูลใน file
+----------------------------------------------
+จะทดลองกับ linux
+ubuntu 17.04 (image)
+docker run -it -d --name Ubuntu -p 9000:80 ubuntu:17.04
+
+สร้าง network ชื่อ proxy_net
+docker network create proxy_net
+
+แล้วเอา 2 ตัวมาอยู่ ใน proxy_net
+
+แล้วเข้า ubuntu
+docker exec -it Ubuntu /bin/bash
+
+ติดตั้ง apt-get update
+// ติดตั้ง ping 
+apt-get install iputils-ping
+
+แล้ว ping ProxyServer
+
+set everonment =set proxy ให้ linux
+export http_proxy=http://ipProxy:port
+export https_proxy=https://ipProxy:port
+ต้อง set 2 อัน ทั้ง http และ https
+</pre>
+</body>
+
+<html>
